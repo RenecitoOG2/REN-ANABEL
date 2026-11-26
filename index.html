@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia 💗</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --rosa:#ff6b9d;
+    --rosa-suave:#ffd6e7;
+    --vino:#8e3b5e;
+    --texto:#4a2c3a;
+    --crema:#fffafc;
+    --sombra:0 10px 30px rgba(180,80,120,.13);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Poppins',system-ui,-apple-system,sans-serif;
+    color:var(--texto);
+    background:linear-gradient(165deg,#fff6fa 0%,#ffe9f2 45%,#fff2f7 100%);
+    min-height:100vh;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+
+  /* ---------- Corazones flotando ---------- */
+  .hearts{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+  .hearts span{
+    position:absolute;top:0;opacity:.35;
+    animation-name:flotar;animation-timing-function:linear;animation-iteration-count:infinite;
+  }
+  @keyframes flotar{
+    from{transform:translateY(105vh) rotate(0deg)}
+    to{transform:translateY(-15vh) rotate(320deg)}
+  }
+
+  .contenido{position:relative;z-index:1}
+
+  /* ---------- Cabecera ---------- */
+  .hero{
+    text-align:center;
+    padding:70px 20px 50px;
+  }
+  .hero .mini{
+    text-transform:uppercase;
+    letter-spacing:.35em;
+    font-size:.72rem;
+    color:var(--rosa);
+    font-weight:600;
+    margin-bottom:14px;
+  }
+  .hero h1{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(2.6rem,9vw,4.6rem);
+    color:var(--vino);
+    line-height:1.1;
+    font-weight:700;
+  }
+  .hero h1 .corazon{
+    color:var(--rosa);
+    font-size:.7em;
+    display:inline-block;
+    animation:latido 1.6s ease-in-out infinite;
+  }
+  @keyframes latido{
+    0%,100%{transform:scale(1)}
+    25%{transform:scale(1.2)}
+    40%{transform:scale(1)}
+    60%{transform:scale(1.15)}
+  }
+  .hero .sub{
+    margin-top:14px;
+    font-weight:300;
+    color:#8a6274;
+    font-size:1rem;
+  }
+  .hero .linea{
+    width:70px;height:3px;border-radius:3px;
+    background:linear-gradient(90deg,transparent,var(--rosa),transparent);
+    margin:26px auto 0;
+  }
+
+  /* ---------- Secciones ---------- */
+  .seccion{
+    max-width:1050px;
+    margin:0 auto;
+    padding:46px 20px;
+  }
+  .seccion h2{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(1.8rem,5vw,2.6rem);
+    color:var(--vino);
+    text-align:center;
+    margin-bottom:8px;
+    font-weight:700;
+  }
+  .seccion .bajada{
+    text-align:center;
+    color:#96707f;
+    font-size:.9rem;
+    font-weight:300;
+    margin-bottom:34px;
+  }
+
+  /* ---------- Contador ---------- */
+  .stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:16px;
+  }
+  .stat{
+    background:#fff;
+    border-radius:22px;
+    padding:26px 14px;
+    text-align:center;
+    box-shadow:var(--sombra);
+    border:1px solid rgba(255,182,213,.45);
+    transition:transform .3s ease;
+  }
+  .stat:hover{transform:translateY(-5px)}
+  .stat .num{
+    font-family:'Dancing Script',cursive;
+    font-size:2.6rem;
+    font-weight:700;
+    color:var(--rosa);
+    line-height:1;
+  }
+  .stat .lbl{
+    margin-top:8px;
+    font-size:.78rem;
+    letter-spacing:.08em;
+    text-transform:uppercase;
+    color:#a07e8c;
+    font-weight:600;
+  }
+  .stat.destacado{
+    background:linear-gradient(140deg,#ff8ab8,#ff6b9d);
+    border-color:transparent;
+  }
+  .stat.destacado .num,.stat.destacado .lbl{color:#fff}
+
+  /* ---------- Galería ---------- */
+  .galeria{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(270px,1fr));
+    gap:24px;
+  }
+  .recuerdo{
+    background:#fff;
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:var(--sombra);
+    border:1px solid rgba(255,182,213,.45);
+    transition:transform .35s ease,box-shadow .35s ease;
+    display:flex;flex-direction:column;
+  }
+  .recuerdo:hover{
+    transform:translateY(-8px) rotate(-.6deg);
+    box-shadow:0 18px 40px rgba(180,80,120,.22);
+  }
+  .foto-marco{
+    position:relative;
+    aspect-ratio:4/3;
+    background:linear-gradient(135deg,#ffd9e8,#ffeef5);
+    display:flex;align-items:center;justify-content:center;
+    overflow:hidden;
+  }
+  .foto-marco::before{
+    content:'📷';
+    font-size:2.6rem;
+    opacity:.45;
+  }
+  .foto-marco img{
+    position:absolute;inset:0;
+    width:100%;height:100%;
+    object-fit:cover;
+    transition:transform .6s ease;
+  }
+  .recuerdo:hover .foto-marco img{transform:scale(1.07)}
+  .recuerdo figcaption{padding:18px 20px 22px}
+  .recuerdo .fecha{
+    font-size:.72rem;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--rosa);
+    font-weight:600;
+  }
+  .recuerdo h3{
+    font-family:'Dancing Script',cursive;
+    font-size:1.5rem;
+    color:var(--vino);
+    margin:4px 0 8px;
+    font-weight:700;
+  }
+  .recuerdo p{font-size:.88rem;font-weight:300;color:#7c5c69}
+
+  /* ---------- Ruleta ---------- */
+  .ruleta-zona{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:26px;
+  }
+  .ruleta-wrap{
+    position:relative;
+    width:min(340px,88vw);
+    aspect-ratio:1;
+    filter:drop-shadow(0 16px 34px rgba(180,80,120,.25));
+  }
+  .ruleta-wrap svg{width:100%;height:100%;display:block}
+  #rueda{
+    transform-box:view-box;
+    transform-origin:50% 50%;
+    transition:transform 5s cubic-bezier(.15,.72,.14,1);
+  }
+  .puntero{
+    position:absolute;
+    top:-10px;left:50%;
+    transform:translateX(-50%);
+    width:0;height:0;
+    border-left:15px solid transparent;
+    border-right:15px solid transparent;
+    border-top:28px solid var(--vino);
+    z-index:5;
+    filter:drop-shadow(0 3px 4px rgba(0,0,0,.2));
+  }
+  .centro-btn{
+    position:absolute;
+    top:50%;left:50%;
+    transform:translate(-50%,-50%);
+    width:26%;height:26%;
+    border-radius:50%;
+    border:4px solid #fff;
+    background:linear-gradient(140deg,#ff8ab8,#ff5f96);
+    color:#fff;
+    font-family:'Poppins',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,2.6vw,.9rem);
+    letter-spacing:.06em;
+    cursor:pointer;
+    z-index:4;
+    box-shadow:0 6px 18px rgba(255,90,150,.5);
+    transition:transform .2s ease,box-shadow .2s ease;
+  }
+  .centro-btn:hover:not(:disabled){transform:translate(-50%,-50%) scale(1.07)}
+  .centro-btn:active:not(:disabled){transform:translate(-50%,-50%) scale(.96)}
+  .centro-btn:disabled{opacity:.75;cursor:wait}
+
+  .resultado{
+    min-height:64px;
+    text-align:center;
+    font-size:1.05rem;
+    color:var(--vino);
+    background:#fff;
+    border-radius:18px;
+    padding:16px 26px;
+    box-shadow:var(--sombra);
+    border:1px dashed rgba(255,107,157,.5);
+    max-width:460px;
+    transition:opacity .4s ease;
+  }
+  .resultado .emoji{font-size:1.4rem;margin-right:6px}
+  .resultado strong{color:var(--rosa);font-weight:600}
+  .resultado.vacio{
+    background:transparent;border:none;box-shadow:none;color:#b193a1;
+    font-size:.9rem;font-weight:300;
+  }
+
+  /* ---------- Frase del día ---------- */
+  .frase-card{
+    background:#fff;
+    border-radius:26px;
+    padding:38px 30px;
+    text-align:center;
+    box-shadow:var(--sombra);
+    border:1px solid rgba(255,182,213,.5);
+    position:relative;
+    overflow:hidden;
+  }
+  .frase-card::before{
+    content:'❝';
+    position:absolute;
+    top:-24px;left:14px;
+    font-size:7rem;
+    color:rgba(255,107,157,.1);
+    font-family:Georgia,serif;
+    line-height:1;
+  }
+  .frase-texto{
+    font-family:'Dancing Script',cursive;
+    font-size:clamp(1.4rem,4.4vw,2rem);
+    color:var(--vino);
+    line-height:1.45;
+    position:relative;
+    z-index:1;
+  }
+  .firma{
+    display:block;
+    margin-top:18px;
+    font-size:.75rem;
+    letter-spacing:.15em;
+    text-transform:uppercase;
+    color:#c093a5;
+    font-weight:600;
+  }
+  .acciones-frase{
+    display:flex;
+    justify-content:center;
+    margin-top:20px;
+  }
+  .btn-secundario{
+    background:transparent;
+    border:1.5px solid rgba(255,107,157,.5);
+    color:var(--rosa);
+    padding:10px 22px;
+    border-radius:50px;
+    font-family:'Poppins',sans-serif;
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    transition:.25s;
+  }
+  .btn-secundario:hover{background:rgba(255,107,157,.08)}
+  .btn-primario{
+    background:linear-gradient(140deg,#ff8ab8,#ff5f96);
+    border:none;
+    color:#fff;
+    padding:11px 26px;
+    border-radius:50px;
+    font-family:'Poppins',sans-serif;
+    font-size:.82rem;
+    font-weight:600;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(255,90,150,.35);
+    transition:.25s;
+  }
+  .btn-primario:hover{transform:translateY(-2px)}
+
+  .editor{
+    max-width:560px;
+    margin:20px auto 0;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .editor textarea{
+    width:100%;
+    border-radius:18px;
+    border:1.5px solid rgba(255,107,157,.4);
+    padding:16px 18px;
+    font-family:'Poppins',sans-serif;
+    font-size:.95rem;
+    color:var(--texto);
+    resize:vertical;
+    background:#fff;
+    outline:none;
+    transition:border-color .25s;
+  }
+  .editor textarea:focus{border-color:var(--rosa)}
+  .editor-botones{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .oculto{display:none !important}
+
+  /* ---------- Footer ---------- */
+  footer{
+    text-align:center;
+    padding:50px 20px 60px;
+    color:#b193a1;
+    font-size:.82rem;
+    font-weight:300;
+  }
+  footer .corazon{color:var(--rosa)}
+
+  @media (max-width:520px){
+    .hero{padding:52px 18px 36px}
+    .seccion{padding:34px 18px}
+    .frase-card{padding:30px 20px}
+  }
+</style>
+</head>
+<body>
+
+<div class="hearts" aria-hidden="true"></div>
+
+<div class="contenido">
+
+  <!-- ============ CABECERA ============ -->
+  <header class="hero">
+    <p class="mini">Para ti, mi amor</p>
+    <h1 id="tituloPareja">Él <span class="corazon">♥</span> Ella</h1>
+    <p class="sub">Nuestra historia, un día a la vez</p>
+    <div class="linea"></div>
+  </header>
+
+  <!-- ============ CONTADOR ============ -->
+  <section class="seccion">
+    <h2>Nuestro tiempo juntos</h2>
+    <p class="bajada">Cada día a tu lado cuenta</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="num" id="statDias">0</div>
+        <div class="lbl">Días juntos</div>
+      </div>
+      <div class="stat">
+        <div class="num" id="statMeses">0</div>
+        <div class="lbl">Meses juntos</div>
+      </div>
+      <div class="stat destacado">
+        <div class="num" id="statAniv">0</div>
+        <div class="lbl" id="lblAniv">Próximo aniversario</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ GALERÍA ============ -->
+  <section class="seccion">
+    <h2>Nuestros recuerdos</h2>
+    <p class="bajada">Momentos que guardo en el corazón</p>
+    <div class="galeria" id="galeria"></div>
+  </section>
+
+  <!-- ============ RULETA ============ -->
+  <section class="seccion">
+    <h2>¿Qué hacemos hoy?</h2>
+    <p class="bajada">Deja que el destino elija nuestra próxima cita</p>
+    <div class="ruleta-zona">
+      <div class="ruleta-wrap">
+        <div class="puntero"></div>
+        <svg id="ruletaSvg" viewBox="0 0 300 300" aria-label="Ruleta de citas">
+          <g id="rueda"></g>
+        </svg>
+        <button class="centro-btn" id="btnGirar">GIRAR</button>
+      </div>
+      <p class="resultado vacio" id="resultado">Pulsa GIRAR y dejemos que el destino decida ✨</p>
+    </div>
+  </section>
+
+  <!-- ============ FRASE DEL DÍA ============ -->
+  <section class="seccion">
+    <h2>La frase de hoy</h2>
+    <p class="bajada">Un pensamiento para ti, cada mañana</p>
+    <div class="frase-card">
+      <p class="frase-texto" id="fraseTexto">…</p>
+      <span class="firma" id="fraseFirma"></span>
+    </div>
+    <div class="acciones-frase">
+      <button class="btn-secundario" id="btnEditar">✎ Escribir mi frase de hoy</button>
+    </div>
+    <div class="editor oculto" id="editor">
+      <textarea id="inputFrase" rows="3" maxlength="240" placeholder="Escribe algo bonito para ella..."></textarea>
+      <div class="editor-botones">
+        <button class="btn-primario" id="btnGuardar">Guardar</button>
+        <button class="btn-secundario" id="btnRestaurar">Usar frase automática</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Hecho con <span class="corazon">♥</span> para ti
+  </footer>
+
+</div>
+
+<script>
+/* =========================================================
+   1) CONFIGURACIÓN  —  EDITA ESTA PARTE
+   ========================================================= */
+
+const CONFIG = {
+  yo: 'Rene',                 
+  ella: 'Anabel',              
+  inicio: '2026-06-07'        
+};
+
+// Si una foto no existe, se muestra un marco con un 📷 (no se rompe nada).
+const RECUERDOS = [
+  {
+    foto: 'fotos/1.jpeg',
+    titulo: 'Una Familia Tradicional',
+    fecha: '12 de Junio de 2026',
+    texto: 'El Futuro que siempre quiero compartir contigo.'
+  },
+  {
+    foto: 'fotos/2.jpeg',
+    titulo: 'Nuestra Primeras Flores',
+    fecha: '21 de junio de 2026',
+    texto: 'Estabas tan feliz que llenabas mi corazon de amor con una sonrisa.'
+  },
+  {
+    foto: 'fotos/3.jpeg',
+    titulo: 'Nuestra primera Comida juntos',
+    fecha: '22 de julio de 2026',
+    texto: 'Descubrí que cualquier momento es bonito si estás tú.'
+  },
+  {
+    foto: 'fotos/4.jpeg',
+    titulo: 'Una tarde cualquiera',
+    fecha: '4 de agosto de 2026',
+    texto: 'De esas tardes que no tienen nada especial y aun así lo tienen todo.'
+  },
+  {
+    foto: 'fotos/5.jpeg',
+    titulo: 'Nuestra primera cita',
+    fecha: '7 de septiembre de 2026',
+    texto: 'Aunque no haya salido lo mejor posible fue un dia bellisimo.'
+  },
+  {
+    foto: 'fotos/6.jpeg',
+    titulo: 'felices por nada',
+    fecha: '17 de septiembre de 2026',
+    texto: 'Mi foto favorita. Mi momento favorito. Mi persona favorita.'
+  }
+];
+
+// ---- FRASES ROMÁNTICAS  ----
+const FRASES = [
+  'Contigo hasta los lunes son bonitos.',
+  'No sé qué hice para merecerte, pero pienso seguir haciéndolo.',
+  'Mi lugar favorito en el mundo es a tu lado.',
+  'Podría pasar mil vidas y en todas te elegiría a ti.',
+  'Me gustas incluso cuando te enojas conmigo.',
+  'Eres el pensamiento bonito que llega sin avisar.',
+  'Si tuviera que resumir mi suerte, diría tu nombre.',
+  'Cada día contigo es un día que vale la pena.',
+  'Amo tus ojos, tu risa, y la forma en que existes.',
+  'No necesito un paraíso: ya vivo en tus abrazos.',
+  'Eres mi plan favorito de todos los planes.',
+  'Gracias por ser mi calma en medio de todo el ruido.',
+  'Te quiero hoy, mañana y en todas las versiones del futuro.',
+  'Mi música favorita es el sonido de tu risa.',
+  'Eres la casualidad más bonita que me ha pasado.'
+];
+
+// ---- OPCIONES DE LA RULETA ----
+// "corto" = texto que aparece dentro de la ruleta (máx. ~10 letras)
+// "texto" = lo que se muestra en el resultado
+const OPCIONES = [
+  { emoji: '🌹', corto: 'comida',      texto: 'ir a comer' },
+  { emoji: '🎬', corto: 'Cine',      texto: 'Noche de cine con palomitas y manta' },
+  { emoji: '🧺', corto: 'Parque',    texto: 'parque al atardecer' },
+  { emoji: '🍦', corto: 'Helado',    texto: 'Helado y paseo sin rumbo' },
+  { emoji: '🍳', corto: 'Cocinar',   texto: 'Cocinar juntos una receta nueva' },
+  { emoji: '🌅', corto: 'Atardecer', texto: 'Ver el atardecer desde un lugar alto' },
+  { emoji: '🎲', corto: 'Juegos',    texto: 'Noche de juegos' },
+  { emoji: '🎤', corto: 'Karaoke',   texto: 'Karaoke en casa (aunque cantemos mal)' },
+  { emoji: '🏖️', corto: 'Playa',    texto: 'Escapada a la playa, aunque sea un día' },
+  { emoji: '🎨', corto: 'musica',     texto: 'colocar una cancion cada uno' },
+  { emoji: '💃', corto: 'Baile',     texto: 'Clase de baile o bailar en la sala' },
+  { emoji: '⭐', corto: 'Estrellas', texto: 'mirar las estrellas' }
+];
+
+/* =========================================================
+   2)
+   ========================================================= */
+
+const $ = s => document.querySelector(s);
+const MS_DIA = 86400000;
+const NS = 'http://www.w3.org/2000/svg';
+
+/* ---------- Utilidades de fecha ---------- */
+function parseFecha(s){
+  const [y, m, d] = s.split('-').map(Number);
+  return new Date(y, m - 1, d);
+}
+function claveFecha(d){
+  return d.getFullYear() + '-' +
+    String(d.getMonth() + 1).padStart(2, '0') + '-' +
+    String(d.getDate()).padStart(2, '0');
+}
+const hoy = new Date();
+hoy.setHours(0, 0, 0, 0);
+
+/* ---------- Cabecera ---------- */
+$('#tituloPareja').innerHTML =
+  `${CONFIG.yo} <span class="corazon">♥</span> ${CONFIG.ella}`;
+document.title = `${CONFIG.yo} ♥ ${CONFIG.ella}`;
+
+/* ---------- Contador ---------- */
+(function contador(){
+  const inicio = parseFecha(CONFIG.inicio);
+  const dias = Math.max(0, Math.round((hoy - inicio) / MS_DIA));
+
+  let meses = (hoy.getFullYear() - inicio.getFullYear()) * 12 +
+              (hoy.getMonth() - inicio.getMonth());
+  if (hoy.getDate() < inicio.getDate()) meses--;
+  meses = Math.max(0, meses);
+
+  // Próximo aniversario
+  let aniv = new Date(hoy.getFullYear(), inicio.getMonth(), inicio.getDate());
+  if (aniv < hoy) {
+    aniv = new Date(hoy.getFullYear() + 1, inicio.getMonth(), inicio.getDate());
+  }
+  const diasAniv = Math.round((aniv - hoy) / MS_DIA);
+  const anios = aniv.getFullYear() - inicio.getFullYear();
+
+  $('#statDias').textContent = dias;
+  $('#statMeses').textContent = meses;
+
+  if (diasAniv === 0) {
+    $('#statAniv').textContent = '¡Hoy!';
+    $('#lblAniv').textContent = `Feliz ${anios}º aniversario 🎉`;
+  } else {
+    $('#statAniv').textContent = diasAniv;
+    $('#lblAniv').textContent = `Para nuestro ${anios}º aniversario`;
+  }
+})();
+
+/* ---------- Galería ---------- */
+$('#galeria').innerHTML = RECUERDOS.map(r => `
+  <figure class="recuerdo">
+    <div class="foto-marco">
+      <img src="${r.foto}" alt="${r.titulo}" loading="lazy"
+           onerror="this.style.display='none'">
+    </div>
+    <figcaption>
+      <span class="fecha">${r.fecha}</span>
+      <h3>${r.titulo}</h3>
+      <p>${r.texto}</p>
+    </figcaption>
+  </figure>
+`).join('');
+
+/* ---------- Ruleta ---------- */
+(function ruleta(){
+  const svgRueda = $('#rueda');
+  const CX = 150, CY = 150, R = 146;
+  const n = OPCIONES.length;
+  const seg = 360 / n;
+  const PALETA = ['#ff9ec4', '#ffd0e2', '#ffb3d1', '#ffe1ec'];
+
+  // Punto en el borde, con ángulo medido desde arriba y en sentido horario
+  const punto = (ang, r) => {
+    const rad = (ang - 90) * Math.PI / 180;
+    return [CX + r * Math.cos(rad), CY + r * Math.sin(rad)];
+  };
+
+  OPCIONES.forEach((op, i) => {
+    const a1 = i * seg;
+    const a2 = (i + 1) * seg;
+    const [x1, y1] = punto(a1, R);
+    const [x2, y2] = punto(a2, R);
+
+    // Sector
+    const path = document.createElementNS(NS, 'path');
+    path.setAttribute('d',
+      `M ${CX} ${CY} L ${x1.toFixed(2)} ${y1.toFixed(2)} ` +
+      `A ${R} ${R} 0 0 1 ${x2.toFixed(2)} ${y2.toFixed(2)} Z`);
+    path.setAttribute('fill', PALETA[i % PALETA.length]);
+    path.setAttribute('stroke', '#fff');
+    path.setAttribute('stroke-width', '2');
+    svgRueda.appendChild(path);
+
+    // Texto en orientación radial
+    const centro = a1 + seg / 2;
+    const [px, py] = punto(centro, R * 0.62);
+    let rot = centro - 90;
+    if (rot > 90 && rot < 270) rot += 180; // que no quede al revés
+
+    const txt = document.createElementNS(NS, 'text');
+    txt.setAttribute('x', px.toFixed(2));
+    txt.setAttribute('y', py.toFixed(2));
+    txt.setAttribute('text-anchor', 'middle');
+    txt.setAttribute('dominant-baseline', 'middle');
+    txt.setAttribute('transform', `rotate(${rot.toFixed(2)} ${px.toFixed(2)} ${py.toFixed(2)})`);
+    txt.setAttribute('font-family', 'Poppins, sans-serif');
+    txt.setAttribute('font-size', '13');
+    txt.setAttribute('font-weight', '600');
+    txt.setAttribute('fill', '#7a2c4a');
+    txt.textContent = op.corto;
+    svgRueda.appendChild(txt);
+  });
+
+  // Círculo blanco central
+  const centroC = document.createElementNS(NS, 'circle');
+  centroC.setAttribute('cx', CX);
+  centroC.setAttribute('cy', CY);
+  centroC.setAttribute('r', 46);
+  centroC.setAttribute('fill', '#fff');
+  svgRueda.appendChild(centroC);
+
+  // Lógica del giro
+  let rotacion = 0;
+  let girando = false;
+  const btn = $('#btnGirar');
+  const salida = $('#resultado');
+
+  btn.addEventListener('click', () => {
+    if (girando) return;
+    girando = true;
+    btn.disabled = true;
+    salida.classList.add('vacio');
+    salida.textContent = 'Girando… 🎡';
+
+    const idx = Math.floor(Math.random() * n);
+    const centroSeg = idx * seg + seg / 2;
+    const jitter = (Math.random() - 0.5) * seg * 0.55;
+    const destino = ((360 - centroSeg - jitter) % 360 + 360) % 360;
+
+    const vueltas = 5 + Math.floor(Math.random() * 3);
+    const base = Math.ceil(rotacion / 360) * 360;
+    rotacion = base + vueltas * 360 + destino;
+
+    svgRueda.style.transform = `rotate(${rotacion}deg)`;
+
+    setTimeout(() => {
+      const op = OPCIONES[idx];
+      salida.classList.remove('vacio');
+      salida.innerHTML =
+        `<span class="emoji">${op.emoji}</span>¡Nuestra próxima cita será: <strong>${op.texto}</strong>!`;
+      girando = false;
+      btn.disabled = false;
+    }, 5200);
+  });
+})();
+
+/* ---------- Frase del día ---------- */
+(function fraseDelDia(){
+  const claveHoy = 'frase_' + claveFecha(hoy);
+  const indice = Math.floor(hoy.getTime() / MS_DIA) % FRASES.length;
+  const fraseAuto = FRASES[indice];
+
+  const elTexto = $('#fraseTexto');
+  const elFirma = $('#fraseFirma');
+  const editor = $('#editor');
+  const input = $('#inputFrase');
+
+  const fechaBonita = hoy.toLocaleDateString('es-ES', {
+    day: 'numeric', month: 'long', year: 'numeric'
+  });
+
+  function pintar(){
+    const guardada = localStorage.getItem(claveHoy);
+    elTexto.textContent = '“' + (guardada || fraseAuto) + '”';
+    elFirma.textContent = guardada
+      ? 'Escrito por mí · ' + fechaBonita
+      : 'Frase del día · ' + fechaBonita;
+  }
+  pintar();
+
+  $('#btnEditar').addEventListener('click', () => {
+    editor.classList.toggle('oculto');
+    if (!editor.classList.contains('oculto')) {
+      input.value = localStorage.getItem(claveHoy) || fraseAuto;
+      input.focus();
+    }
+  });
+
+  $('#btnGuardar').addEventListener('click', () => {
+    const val = input.value.trim();
+    if (!val) return;
+    localStorage.setItem(claveHoy, val);
+    editor.classList.add('oculto');
+    pintar();
+  });
+
+  $('#btnRestaurar').addEventListener('click', () => {
+    localStorage.removeItem(claveHoy);
+    editor.classList.add('oculto');
+    pintar();
+  });
+})();
+
+/* ---------- Corazones flotando ---------- */
+(function corazones(){
+  const cont = document.querySelector('.hearts');
+  const emojis = ['💗', '💕', '🌸', '💖', '🤍', '💞'];
+  for (let i = 0; i < 16; i++) {
+    const s = document.createElement('span');
+    s.textContent = emojis[i % emojis.length];
+    s.style.left = Math.random() * 100 + '%';
+    s.style.fontSize = (13 + Math.random() * 20) + 'px';
+    s.style.animationDuration = (16 + Math.random() * 16) + 's';
+    s.style.animationDelay = (-Math.random() * 30) + 's';
+    cont.appendChild(s);
+  }
+})();
+</script>
+</body>
+</html>
